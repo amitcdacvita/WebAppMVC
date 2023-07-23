@@ -7,5 +7,8 @@
         Employee GetEmployee(int id);
 
         Employee AddEmp (Employee employee);
+        Employee UpdateEmployee(Employee employee);
+        Employee Delete(int id);
+
     }
 }

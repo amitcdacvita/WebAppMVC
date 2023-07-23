@@ -20,6 +20,17 @@
             return employee;
         }
 
+        public Employee Delete(int Id)
+        {
+            Employee obj= _employeeList.FirstOrDefault(e => e.Id == Id);
+            if (obj != null)
+            {
+                _employeeList.Remove(obj);
+            }
+            return obj;
+            
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return _employeeList;
@@ -29,5 +40,17 @@
         {
             return _employeeList.FirstOrDefault(e => e.Id == id);
         }
+
+        public Employee UpdateEmployee(Employee employeeChanges)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == employeeChanges.Id);
+            if (employee != null)
+            {
+                employee.Name = employeeChanges.Name;
+                employee.Email = employeeChanges.Email;
+                employee.Department = employeeChanges.Department;
+            }
+            return employee;
+        }
     }
-}
+    }

@@ -11,7 +11,7 @@ namespace WebAppMVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
-
+            builder.Services.AddSingleton<IDepartmentRepository, MockDepartmentRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
