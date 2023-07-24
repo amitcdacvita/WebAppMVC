@@ -1,3 +1,5 @@
+
+using Microsoft.EntityFrameworkCore;
 using WebAppMVC.Models;
 
 namespace WebAppMVC
@@ -7,11 +9,16 @@ namespace WebAppMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
-            builder.Services.AddSingleton<IDepartmentRepository, MockDepartmentRepository>();
+            var services = builder.Services;
+            // Add services to the container.
+            var cs = builder.Configuration.GetConnectionString("EmployeeDBConnection");
+            builder.Services.AddDbContextPool<AppdbContext>(con => con.UseSqlServer(cs));
+            
+            builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+           // builder.Services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+           // builder.Services.AddSingleton<IDepartmentRepository, MockDepartmentRepository>();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
